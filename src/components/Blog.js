@@ -2,6 +2,7 @@ import React from "react"
 import blogService from "../services/blogs"
 import PropTypes from "prop-types"
 
+
 class Blog extends React.Component {
     constructor(props) {
         super(props)
@@ -54,7 +55,7 @@ class Blog extends React.Component {
             
         } catch(exception){
             console.log(exception)
-            this.props.setError("You cannot delete blogs added by other users")
+            //this.props.setError("You cannot delete blogs added by other users")
         }
     }
     
@@ -97,7 +98,7 @@ Blog.propTypes = {
     blog: PropTypes.object.isRequired,
     updateBlog: PropTypes.func.isRequired,
     deleteBlog: PropTypes.func.isRequired,
-    setError: PropTypes.func.isRequired,
+    
 
 }
 export default Blog
