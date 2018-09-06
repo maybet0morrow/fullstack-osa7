@@ -26,6 +26,7 @@ const update = async (newObject) => {
     const config = {
         headers: { "Authorization": token }
     }
+    newObject = {...newObject, likes: newObject.likes + 1}
 
     const response = await axios.put(`${baseUrl}/${newObject.id}`,newObject, config)
 

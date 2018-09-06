@@ -1,37 +1,43 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
-    return (
-        <div>
-            <h2>Kirjaudu</h2>
+import { connect } from "react-redux"
+import { login } from "../reducers/userReducer"
+import {notify} from "../reducers/notificationReducer"
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    käyttäjätunnus
-                    <input
-                        value={username}
-                        onChange={handleChange}
-                        name="username"
-                    />
-                </div>
-                <div>
-                    salasana
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">kirjaudu</button>
-            </form>
-        </div>
-    )
+class LoginForm extends React.Component {
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        const username = e.target.username.value
+        const password = e.target.password.value
+        this.props.login(username,password)
+        
+
+    }
+    render() {
+        return (
+            <div>
+                <h2>Kirjaudu</h2>
+    
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        käyttäjätunnus
+                        <input
+                            name="username"
+                        />
+                    </div>
+                    <div>
+                        salasana
+                        <input
+                            type="password"
+                            name="password"
+                        />
+                    </div>
+                    <button type="submit">kirjaudu</button>
+                </form>
+            </div>
+        )
+    }
 }
-LoginForm.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired
-}
-export default LoginForm
+export default connect(
+    null,
+    { login, notify}
+)(LoginForm)

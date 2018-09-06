@@ -1,6 +1,8 @@
 import React from "react"
-import blogService from "../services/blogs"
-import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { likeBlog, deleteBlog } from "../reducers/blogReducer"
+import { notify } from "../reducers/notificationReducer";
+
 
 
 class Blog extends React.Component {
@@ -8,57 +10,32 @@ class Blog extends React.Component {
         super(props)
         
         this.state = {
-            blog : this.props.blog,
+            
             visible: false
         }
     }
     toggleVisibility = () => {
+        
         this.setState({ visible: !this.state.visible })
         
     }
-    updateBlog = async (event) => {
-        event.preventDefault()
-        
-        try{
-            const  blogObject ={
-                title: this.state.blog.title,
-                author: this.state.blog.author,
-                url: this.state.blog.url,
-                likes: this.state.blog.likes++,
-                id: this.state.blog.id,
-                user: this.state.blog.user
-                
-            }
-            blogObject.likes +=1
-            // Here is something weird, "likes" increment happens twice
-            // But it doesn't double it in either frontend or backend
-            // with only ++ operation the backend doesn't get the increment only frontend
-            //with += 1 the back end catches up but frontend doesn't update...
-            //weird but let's keep it for now and go forward..
-            await blogService.update(blogObject)
-            this.props.updateBlog(blogObject)
-            
-            
-        } catch (exception) {
-            console.log(exception)
-            
+
+    likeClick = (event) => {
+        event.stopPropagation()
+        this.props.likeBlog(this.props.blog)
+
+    }
+
+    deleteClick = (event) => {
+        console.log(this.props.user.username)
+        console.log(this.props.blog.user.username)
+        if((this.props.user.username === this.props.blog.user.username)||(this.props.blog.user === null)){
+            this.props.deleteBlog(this.props.blog)
+        }else{
+            this.props.notify("You cannot delete blogs created by other users.",true,5)
         }
     }
-    deleteBlog = async (event) => {
-        event.preventDefault()
-        window.confirm(`delete "${this.state.blog.title}" by ${this.state.blog.author}`)
-        try{
-   
-            await blogService.deleteBlog(this.state.blog)
-            this.props.deleteBlog(this.state.blog)
-            
-            
-        } catch(exception){
-            console.log(exception)
-            //this.props.setError("You cannot delete blogs added by other users")
-        }
-    }
-    
+
 
     
 
@@ -76,16 +53,16 @@ class Blog extends React.Component {
         return (
             <div style={blogStyle}>
                 <div style={hideWhenVisible} className="simple" onClick={this.toggleVisibility}>
-                    <p > {this.state.blog.title}, <b> {this.state.blog.author}</b></p>
+                    <p > {this.props.blog.title}, <b> {this.props.blog.author}</b></p>
                 </div>
                 <div style={showWhenVisible} className="expanded" onClick={this.toggleVisibility}>
-                    <div > {this.state.blog.title}, <b> {this.state.blog.author}</b></div>
-                    {this.state.blog.url}
+                    <div > {this.props.blog.title}, <b> {this.props.blog.author}</b></div>
+                    {this.props.blog.url}
                     <br/>
-                    {this.state.blog.likes} likes
-                <button onClick={this.updateBlog} > Like </button>
-                     <div>Added by {this.state.blog.user === undefined ? "Anonymous": this.state.blog.user.name} </div>
-                     <button onClick={this.deleteBlog} > Delete </button>
+                    {this.props.blog.likes} likes
+                <button onClick={this.likeClick}> Like </button>
+                     <div>Added by {this.props.blog.user === undefined ? "Anonymous": this.props.blog.user.name} </div>
+                     <button onClick={this.deleteClick} > Delete </button>
                 </div>
             </div>
 
@@ -93,12 +70,14 @@ class Blog extends React.Component {
     }
 }
 
-Blog.propTypes = {
-    
-    blog: PropTypes.object.isRequired,
-    updateBlog: PropTypes.func.isRequired,
-    deleteBlog: PropTypes.func.isRequired,
-    
+const mapStateToProps = (state) => {
 
+    return {
+        user : state.user,
+    }
 }
-export default Blog
+
+export default connect(
+    mapStateToProps,
+    {likeBlog, deleteBlog, notify}
+)(Blog)

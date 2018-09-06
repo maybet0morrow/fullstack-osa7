@@ -1,53 +1,32 @@
 import React from "react"
-import blogService from "../services/blogs"
-import PropTypes from 'prop-types'
+
+import {notify} from "../reducers/notificationReducer"
+import { createBlog } from "../reducers/blogReducer"
+import { connect } from "react-redux";
 
 
 class BlogForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            author: "",
-            title: "",
-            likes: 0,
-            url: "",
-            user: null
-            
-        }
-    }
+    // LISÄTESSÄ BACKEND PALAUTTAA blogin jossa user kentässä vain userID --> Et voi poistaa samalla loadilla koska tällä hetkellä toisella loadilla ei user id:tä, pitää muutta backend.
+    //delete ei renderoi päivitettyä listaa.
 
-    handleBlogFormFieldChange = (event) => {
-
-        this.setState({ [event.target.name]: event.target.value })
-
-    }
-
-    createBlog = async (event) => {
+    handleSubmit = async (event) => {
         console.log("creating...")
         event.preventDefault()
+        const title = event.target.title.value
+        const author = event.target.author.value
+        const url = event.target.url.value
+        event.target.title.value = ""
+        event.target.author.value = ""
+        event.target.url.value =""
         
         try {
             const blogObject = {
-                title: this.state.title,
-                author: this.state.author,
-                url: this.state.url,
-                likes: this.state.likes,
-                
+                title,
+                author,
+                url,
+                likes: 0,
             }
-            const addedBlog = await blogService.create(blogObject)
-            
-            this.setState({
-                author: "",
-                title: "",
-                url: "",
-                
-            })
-            
-            console.log(this.props)
-            this.props.addBlog(addedBlog)
-            
-            
-            
+            this.props.createBlog(blogObject)
         } catch (exception) {
             console.log(exception)
         }
@@ -59,14 +38,13 @@ class BlogForm extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.createBlog}>
+                <form onSubmit={this.handleSubmit}>
                     <div>
                         title:
                     <input
                             type="text"
                             name="title"
-                            value={this.state.title}
-                            onChange={this.handleBlogFormFieldChange}
+                            
                         />
                     </div>
                     <div>
@@ -74,8 +52,7 @@ class BlogForm extends React.Component {
                     <input
                             type="text"
                             name="author"
-                            value={this.state.author}
-                            onChange={this.handleBlogFormFieldChange}
+                            
                         />
                     </div>
                     <div>
@@ -83,8 +60,7 @@ class BlogForm extends React.Component {
                     <input
                             type="url"
                             name="url"
-                            value={this.state.url}
-                            onChange={this.handleBlogFormFieldChange}
+                            
                         />
                     </div>
                     <button type="submit">create</button>
@@ -93,8 +69,10 @@ class BlogForm extends React.Component {
         )
     }
 }
-BlogForm.propTypes = {
-    addBlog: PropTypes.func.isRequired,
-    
-}
-export default BlogForm
+
+
+
+export default connect(
+    null,
+    {notify, createBlog}
+)(BlogForm)
