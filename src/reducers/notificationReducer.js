@@ -10,6 +10,7 @@ const notificationReducer = (state = initialState, action) => {
 
 
 export const notify = (message, error, seconds) => {
+    console.log("setting notification:",message)
     return (dispatch) => {
         dispatch({
             type: "SET_NOTIFICATION",

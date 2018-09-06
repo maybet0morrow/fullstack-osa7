@@ -43,7 +43,7 @@ const deleteBlog = async(object2bRemoved) => {
     return response
 }
 
-
+// remove blog id from user???
 
 
 export default { getAll, setToken, create, update, deleteBlog }

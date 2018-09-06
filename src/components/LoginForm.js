@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { login } from "../reducers/userReducer"
+import { login } from "../reducers/loginReducer"
 import {notify} from "../reducers/notificationReducer"
 
 class LoginForm extends React.Component {
     handleSubmit = async (e) => {
         e.preventDefault()
+        
         const username = e.target.username.value
         const password = e.target.password.value
         this.props.login(username,password)
+        
+        
         
 
     }

@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 
 
 class BlogForm extends React.Component {
-    // LISÄTESSÄ BACKEND PALAUTTAA blogin jossa user kentässä vain userID --> Et voi poistaa samalla loadilla koska tällä hetkellä toisella loadilla ei user id:tä, pitää muutta backend.
-    //delete ei renderoi päivitettyä listaa.
+    
+// doesn't automaticly shutdown.
 
     handleSubmit = async (event) => {
         console.log("creating...")
@@ -19,17 +19,15 @@ class BlogForm extends React.Component {
         event.target.author.value = ""
         event.target.url.value =""
         
-        try {
-            const blogObject = {
-                title,
-                author,
-                url,
-                likes: 0,
-            }
-            this.props.createBlog(blogObject)
-        } catch (exception) {
-            console.log(exception)
+        
+        const blogObject = {
+            title,
+            author,
+            url,
+            likes: 0,
         }
+        this.props.createBlog(blogObject)
+        
     }
 
     

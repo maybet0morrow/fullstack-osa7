@@ -9,7 +9,9 @@ import BlogList from "./components/BlogList"
 import Togglable from "./components/Togglable"
 
 import blogReducer, { initBlogs } from "./reducers/blogReducer"
-import { login, logout, initUser } from "./reducers/userReducer"
+import { login, logout, initLoggedUser } from "./reducers/loginReducer"
+
+import { initUsers } from "./reducers/userReducer"
 
 import { connect } from "react-redux"
 import { notify } from "./reducers/notificationReducer"
@@ -20,30 +22,30 @@ class App extends React.Component {
     
 
     componentDidMount = async () => {
-        
+        this.props.initUsers()
         this.props.initBlogs()
         const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser")
         
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON)
-            this.props.initUser(user)
+            this.props.initLoggedUser(user)
             blogService.setToken(user.token)
         }
     }
     
 
     render() {
-        console.log(this.props.blogs)
+        console.log(this.props.users)
         return (
             <div>
                 
-                {this.props.user.user === null ?
+                {this.props.loggedUser === null ?
                     <div>
                     <Notification/>
                     <LoginForm /> 
                         </div>:
                     <div className="visibleWhenLogged">
-                        <p>Logged in as {this.props.user.username} </p>
+                        <p>Logged in as {this.props.loggedUser.username} </p>
                         <button onClick={this.props.logout}>
                             Logout
                         </button>
@@ -70,12 +72,13 @@ const mapStateToProps = (state) => {
 
     return {
         notification : state.notification,
-        user : state.user,
-        blogs: state.blogs
+        loggedUser : state.user,
+        blogs: state.blogs,
+        users: state.users
     }
 }
 
 export default connect(
     mapStateToProps,
-    { notify, initBlogs, login, logout, initUser }
+    { notify, initBlogs, login, logout, initLoggedUser, initUsers }
 )(App)

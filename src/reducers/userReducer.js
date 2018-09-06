@@ -1,69 +1,23 @@
-import loginService from "../services/login"
-import blogService from "../services/blogs"
-const initialState = {
-    username:"",
-    password:"",
-    user :null
-}
-const userReducer = (state = initialState, action) => {
-    switch(action.type){
-        case "LOGIN":
-            return action.data
-        case "LOGOUT":
-            return initialState
-        case "INIT_USER":
+import userService from "../services/users"
+
+const userReducer = (store =[], action) => {
+    switch (action.type){
+        case "INIT_USERS":
             return action.data
         default:
-            return state
+            return store
     }
 }
 
-export const login = (username, password) => {
+export const initUsers = () => {
+    console.log("initing users")
     return async (dispatch) => {
-        
-        const user = await loginService.login({
-            username,
-            password
-        })
-        window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
-        blogService.setToken(user.token)
-        
-        console.log("user set to", user)
+        const users = await userService.getAll()
         dispatch({
-            type: "LOGIN",
-            data: user
-        })
-        
-    }
-}
-
-export const logout = () => {
-    // does this even need to be async??? Ei minusta
-    return async (dispatch) => {
-        try {
-            
-            console.log("user set to null")
-            window.localStorage.removeItem("loggedBlogAppUser")
-            dispatch({
-                type: "LOGOUT",
-                data: null
-            })
-        } catch (exception) {
-            
-        
-        }
-    }
-}
-
-export const initUser = (user) => {
-    return(dispatch) => {
-        dispatch({
-            type: "INIT_USER",
-            data: user
-            
+            type: "INIT_USERS",
+            data: users
         })
     }
-    
 }
 
 export default userReducer

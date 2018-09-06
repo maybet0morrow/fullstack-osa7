@@ -1,9 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import { likeBlog, deleteBlog } from "../reducers/blogReducer"
-import { notify } from "../reducers/notificationReducer";
+import { notify } from "../reducers/notificationReducer"
 
-
+// delete ei renderoi uudelleen!!!
 
 class Blog extends React.Component {
     constructor(props) {
@@ -23,6 +23,7 @@ class Blog extends React.Component {
     likeClick = (event) => {
         event.stopPropagation()
         this.props.likeBlog(this.props.blog)
+        this.props.notify(`Liked: ${this.props.blog.title}`,false,5)
 
     }
 
@@ -34,6 +35,7 @@ class Blog extends React.Component {
         }else{
             this.props.notify("You cannot delete blogs created by other users.",true,5)
         }
+        
     }
 
 

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 
 class Notification extends React.Component {
+    
     render() {
         const styleError = {
             border: "solid",
