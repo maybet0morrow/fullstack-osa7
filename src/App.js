@@ -1,12 +1,11 @@
 import React from "react"
 
 import blogService from "./services/blogs"
-
-import BlogForm from "./components/BlogForm"
+import MainPage from "./components/MainPage"
 import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
-import BlogList from "./components/BlogList"
-import Togglable from "./components/Togglable"
+import SelectedUser from "./components/SelectedUser"
+import UserPage from "./components/UserPage"
 
 import { initBlogs } from "./reducers/blogReducer"
 import { login, logout, initLoggedUser } from "./reducers/loginReducer"
@@ -15,6 +14,10 @@ import { initUsers } from "./reducers/userReducer"
 
 import { connect } from "react-redux"
 import { notify } from "./reducers/notificationReducer"
+
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import { Container } from "../node_modules/semantic-ui-react"
+import LoginInfo from "./components/LoginInfo"
 
 
 
@@ -37,44 +40,49 @@ class App extends React.Component {
     render() {
         console.log(this.props.users)
         return (
-            <div>
+            <Container>
+                <Router>
 
-                {this.props.loggedUser === null ?
                     <div>
-                        <Notification/>
-                        <LoginForm />
-                    </div>:
-                    <div className="visibleWhenLogged">
-                        <p>Logged in as {this.props.loggedUser.username} </p>
-                        <button onClick={this.props.logout}>
-                            Logout
-                        </button>
-                        <Notification/>
-                        <br />
-                        <br />
-                        <Togglable buttonLabel={"New Blog"} ref={component => this.blogForm = component}>
-                            <h2> Create a new Blog </h2>
-                            <BlogForm />
-                        </Togglable>
-                        <BlogList/>
+                        {this.props.loggedUser === null ?
+                            <div>
+                                <Notification />
+                                <LoginForm />
+                            </div> :
+                            <div>
+                                <LoginInfo/>
+                                <Notification/>
+                                <Route exact path="/" render={() => <MainPage />} />
 
+                                <Route exact path="/users/:id" render={({ match }) =>
+                                    <div>
 
+                                        <SelectedUser match={match} />
 
+                                    </div>
+                                } />
+                                <Route path="/users" render={() => <UserPage />} />
+
+                            </div>
+                        }
                     </div>
-                }
 
-            </div>
+                </Router>
+
+
+            </Container>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps =  (state) => {
 
     return {
-        notification : state.notification,
-        loggedUser : state.user,
+        users: state.users,
+        notification: state.notification,
+        loggedUser: state.user,
         blogs: state.blogs,
-        users: state.users
+
     }
 }
 
