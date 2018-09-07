@@ -14,7 +14,7 @@ import { initUsers } from "./reducers/userReducer"
 import { connect } from "react-redux"
 import { notify } from "./reducers/notificationReducer"
 
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { Container } from "../node_modules/semantic-ui-react"
 import LoginInfo from "./components/LoginInfo"
 
@@ -36,10 +36,9 @@ class App extends React.Component {
         }
     }
 
-
+    // menu still pretty basic looking but not gonna style it for now, later when adding styles to everything.
     render() {
-        // Ehkä parempikin ratkaisu olemassa /users/:id tekemiselle mutta toimii nyt.
-        console.log(this.props.users.length === 0)
+
         return (
             <Container>
                 <Router>
@@ -51,6 +50,8 @@ class App extends React.Component {
                                 <LoginForm />
                             </div> :
                             <div>
+                                <Link to={"/blogs/"}> Blogs </Link>
+                                <Link to={"/users/"}> Users </Link>
                                 <LoginInfo />
                                 <Notification />
                                 <Route exact path="/" render={() => <MainPage />} />

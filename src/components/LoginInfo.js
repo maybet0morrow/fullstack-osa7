@@ -7,8 +7,9 @@ class LoginInfo extends React.Component {
 
     render() {
         return (
-            <div className="visibleWhenLogged">
-                <div>Logged in as {this.props.loggedUser.username} </div>
+            <div>
+                Logged in as {this.props.loggedUser.username}&nbsp;
+
                 <button onClick={this.props.logout}>
                     Logout
                 </button>
