@@ -38,7 +38,8 @@ class App extends React.Component {
 
 
     render() {
-        console.log(this.props.users)
+        // Ehkä parempikin ratkaisu olemassa /users/:id tekemiselle mutta toimii nyt.
+        console.log(this.props.users.length === 0)
         return (
             <Container>
                 <Router>
@@ -50,17 +51,19 @@ class App extends React.Component {
                                 <LoginForm />
                             </div> :
                             <div>
-                                <LoginInfo/>
-                                <Notification/>
+                                <LoginInfo />
+                                <Notification />
                                 <Route exact path="/" render={() => <MainPage />} />
+                                {this.props.users.length === 0 ? <div /> :
+                                    <Route exact path="/users/:id" render={({ match }) =>
+                                        <div>
 
-                                <Route exact path="/users/:id" render={({ match }) =>
-                                    <div>
+                                            <SelectedUser match={match} />
 
-                                        <SelectedUser match={match} />
+                                        </div>
+                                    } />
+                                }
 
-                                    </div>
-                                } />
                                 <Route path="/users" render={() => <UserPage />} />
 
                             </div>
@@ -75,7 +78,7 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps =  (state) => {
+const mapStateToProps = (state) => {
 
     return {
         users: state.users,

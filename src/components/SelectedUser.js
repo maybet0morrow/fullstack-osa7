@@ -7,7 +7,7 @@ import { notify } from "../reducers/notificationReducer"
 // this doesn't work as 7.3 should, dunno why mainpage waits for data to load and this just tries to render...
 // Probably better to keep redux here still so app doesn't have extra stuff.
 const SelectedUser = (props) => {
-    console.log(props)
+
     const user = props.users.find(a => a.id === props.match.params.id)
     return (
 
