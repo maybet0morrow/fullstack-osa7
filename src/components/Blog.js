@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { likeBlog, deleteBlog } from "../reducers/blogReducer"
 import { notify } from "../reducers/notificationReducer"
+import { Link } from "react-router-dom"
 
 // delete ei renderoi uudelleen!!!
 
@@ -55,10 +56,11 @@ class Blog extends React.Component {
         return (
             <div style={blogStyle}>
                 <div style={hideWhenVisible} className="simple" onClick={this.toggleVisibility}>
-                    <p > {this.props.blog.title}, <b> {this.props.blog.author}</b></p>
+                    <Link to={`/blogs/${this.props.blog.id}`}> {this.props.blog.title}, <b> {this.props.blog.author}</b> </Link>
                 </div>
                 <div style={showWhenVisible} className="expanded" onClick={this.toggleVisibility}>
-                    <div > {this.props.blog.title}, <b> {this.props.blog.author}</b></div>
+                    <Link to={`/blogs/${this.props.blog.id}`}> {this.props.blog.title}, <b> {this.props.blog.author}</b> </Link>
+                    <br/>
                     {this.props.blog.url}
                     <br/>
                     {this.props.blog.likes} likes

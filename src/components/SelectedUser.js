@@ -1,7 +1,7 @@
 import React from "react"
 import { Table } from "semantic-ui-react"
 import { connect } from "react-redux"
-import { notify } from "../reducers/notificationReducer"
+
 
 //needs to work from direct url and refresh!!!
 // this doesn't work as 7.3 should, dunno why mainpage waits for data to load and this just tries to render...
@@ -50,5 +50,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { notify }
+
 )(SelectedUser)

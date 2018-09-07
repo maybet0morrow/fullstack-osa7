@@ -4,7 +4,6 @@ import blogService from "./services/blogs"
 import MainPage from "./components/MainPage"
 import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
-import SelectedUser from "./components/SelectedUser"
 import UserPage from "./components/UserPage"
 
 import { initBlogs } from "./reducers/blogReducer"
@@ -18,6 +17,7 @@ import { notify } from "./reducers/notificationReducer"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Container } from "../node_modules/semantic-ui-react"
 import LoginInfo from "./components/LoginInfo"
+
 
 
 
@@ -54,17 +54,12 @@ class App extends React.Component {
                                 <LoginInfo />
                                 <Notification />
                                 <Route exact path="/" render={() => <MainPage />} />
-                                {this.props.users.length === 0 ? <div /> :
-                                    <Route exact path="/users/:id" render={({ match }) =>
-                                        <div>
-
-                                            <SelectedUser match={match} />
-
-                                        </div>
-                                    } />
-                                }
 
                                 <Route path="/users" render={() => <UserPage />} />
+
+                                <Route path="/blogs" render={() => <MainPage />} />
+
+
 
                             </div>
                         }

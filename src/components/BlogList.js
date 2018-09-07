@@ -11,7 +11,7 @@ const BlogList = (props) => {
             <h2>Blogs</h2>
             <div className="blogListWrapper">
                 {props.sortedBlogs.map(blog =>
-                    <Blog key={blog.id} blog={blog} likeBlog={props.likeBlog} deleteBlog={props.deleteBlog} />
+                    <Blog key={blog.id} blog={blog}/>
                 )}
             </div>
         </div>
