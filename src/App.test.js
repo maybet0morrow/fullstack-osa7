@@ -1,14 +1,14 @@
-import React from 'react'
-import { mount } from 'enzyme'
-import App from './App'
+import React from "react"
+import { mount } from "enzyme"
+import App from "./App"
 import "./setupTest"
-import Blog from './components/Blog'
-import LoginForm from "./components/LoginForm"
-jest.mock('./services/blogs')
-import blogService from './services/blogs'
-import BlogForm from './components/BlogForm';
+import Blog from "./components/Blog"
 
-describe('<App />', () => {
+jest.mock("./services/blogs")
+import blogService from "./services/blogs"
+
+
+describe("<App />", () => {
     let app
     describe("when user is not logged", () => {
         beforeEach(() => {
@@ -36,7 +36,7 @@ describe('<App />', () => {
 
         it("all notes are rendered", () => {
             app.update()
-            
+
             //console.log(app.text())
             const blogComponents = app.find(Blog)
             expect(blogComponents.length).toEqual(blogService.blogs.length)

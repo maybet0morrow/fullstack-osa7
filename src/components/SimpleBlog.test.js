@@ -1,6 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import SimpleBlog from './SimpleBlog'
+import React from "react"
+import { shallow } from "enzyme"
+import SimpleBlog from "./SimpleBlog"
 import "../setupTest"
 
 describe.skip("<SimpleBlog />", () => {
@@ -10,19 +10,19 @@ describe.skip("<SimpleBlog />", () => {
             author: "testAuthor",
             likes: 2,
         }
-        
+
         const simpleBlogComponent = shallow(<SimpleBlog blog={blog} onClick={null} /> )
-        
+
 
         const infoDiv = simpleBlogComponent.find(".info")
         const likesDiv = simpleBlogComponent.find(".likes")
-        
+
 
         console.log(infoDiv.text())
         expect(infoDiv.text()).toContain(`${blog.title} ${blog.author}`)
         expect(likesDiv.text()).toContain(`blog has ${blog.likes} likes`)
-        
-        
+
+
 
     })
     it("Recognizes Clicks", () => {

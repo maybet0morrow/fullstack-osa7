@@ -1,13 +1,13 @@
 import React from "react"
 
-import {notify} from "../reducers/notificationReducer"
+import { notify } from "../reducers/notificationReducer"
 import { createBlog } from "../reducers/blogReducer"
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 
 
 class BlogForm extends React.Component {
-    
-// doesn't automaticly shutdown.
+
+    // TODO doesn't automaticly toggle visiblity when created.
 
     handleSubmit = async (event) => {
         console.log("creating...")
@@ -18,8 +18,8 @@ class BlogForm extends React.Component {
         event.target.title.value = ""
         event.target.author.value = ""
         event.target.url.value =""
-        
-        
+
+
         const blogObject = {
             title,
             author,
@@ -27,38 +27,38 @@ class BlogForm extends React.Component {
             likes: 0,
         }
         this.props.createBlog(blogObject)
-        
+
     }
 
-    
 
-    
+
+
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         title:
-                    <input
+                        <input
                             type="text"
                             name="title"
-                            
+
                         />
                     </div>
                     <div>
                         author:
-                    <input
+                        <input
                             type="text"
                             name="author"
-                            
+
                         />
                     </div>
                     <div>
                         url:
-                    <input
+                        <input
                             type="url"
                             name="url"
-                            
+
                         />
                     </div>
                     <button type="submit">create</button>
@@ -72,5 +72,5 @@ class BlogForm extends React.Component {
 
 export default connect(
     null,
-    {notify, createBlog}
+    { notify, createBlog }
 )(BlogForm)

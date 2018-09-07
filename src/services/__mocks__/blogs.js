@@ -32,5 +32,5 @@ const getAll = async () => {
 const setToken = (newToken) => {
     token = `bearer ${newToken}`
 }
-export default {getAll, blogs, setToken}
+export default { getAll, blogs, setToken }
 

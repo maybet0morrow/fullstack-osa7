@@ -2,10 +2,10 @@ import userService from "../services/users"
 
 const userReducer = (store =[], action) => {
     switch (action.type){
-        case "INIT_USERS":
-            return action.data
-        default:
-            return store
+    case "INIT_USERS":
+        return action.data
+    default:
+        return store
     }
 }
 

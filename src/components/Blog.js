@@ -8,16 +8,16 @@ import { notify } from "../reducers/notificationReducer"
 class Blog extends React.Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
-            
+
             visible: false
         }
     }
     toggleVisibility = () => {
-        
+
         this.setState({ visible: !this.state.visible })
-        
+
     }
 
     likeClick = (event) => {
@@ -28,30 +28,30 @@ class Blog extends React.Component {
     }
 
     deleteClick = (event) => {
-        console.log(this.props.user.username)
-        console.log(this.props.blog.user.username)
+        event.preventDefault()
+        // props.user doesn't have id so we are determining same user via username, which is viable since backend checks for dublicates.
         if((this.props.user.username === this.props.blog.user.username)||(this.props.blog.user === null)){
             this.props.deleteBlog(this.props.blog)
         }else{
             this.props.notify("You cannot delete blogs created by other users.",true,5)
         }
-        
+
     }
 
 
-    
+
 
     render() {
-        
+
         const hideWhenVisible = { display: this.state.visible ? "none" : "" }
-        const showWhenVisible = { display: this.state.visible ? "": "none"}
+        const showWhenVisible = { display: this.state.visible ? "": "none" }
         const blogStyle = {
             paddingTop: 10,
             paddingLeft: 2,
-            border: 'solid',
+            border: "solid",
             borderWidth: 1,
             marginBottom: 5
-          }
+        }
         return (
             <div style={blogStyle}>
                 <div style={hideWhenVisible} className="simple" onClick={this.toggleVisibility}>
@@ -62,9 +62,9 @@ class Blog extends React.Component {
                     {this.props.blog.url}
                     <br/>
                     {this.props.blog.likes} likes
-                <button onClick={this.likeClick}> Like </button>
-                     <div>Added by {this.props.blog.user === undefined ? "Anonymous": this.props.blog.user.name} </div>
-                     <button onClick={this.deleteClick} > Delete </button>
+                    <button onClick={this.likeClick}> Like </button>
+                    <div>Added by {this.props.blog.user === undefined ? "Anonymous": this.props.blog.user.name} </div>
+                    <button onClick={this.deleteClick} > Delete </button>
                 </div>
             </div>
 
@@ -81,5 +81,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {likeBlog, deleteBlog, notify}
+    { likeBlog, deleteBlog, notify }
 )(Blog)

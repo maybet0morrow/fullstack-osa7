@@ -1,4 +1,4 @@
-const initialState = {message: null, error: false}
+const initialState = { message: null, error: false }
 const notificationReducer = (state = initialState, action) => {
     switch (action.type) {
     case "SET_NOTIFICATION":

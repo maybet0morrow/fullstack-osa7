@@ -2,10 +2,10 @@ import React from "react"
 import Blog from "./Blog"
 import { likeBlog, deleteBlog } from "../reducers/blogReducer"
 import { notify } from "../reducers/notificationReducer"
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 
 const BlogList = (props) => {
-    
+
     return (
         <div>
             <h2>Blogs</h2>
@@ -17,7 +17,7 @@ const BlogList = (props) => {
         </div>
     )
 }
-    
+
 
 
 const sortBlogs = (blogs) => {
