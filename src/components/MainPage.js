@@ -7,11 +7,12 @@ import BlogList from "./BlogList"
 import Togglable from "./Togglable"
 import SelectedBlog from "./SelectedBlog"
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import CommentSection from "./CommentSection"
 
-
+// Routes /blogs/:id and /users/:id don't stop showing when navigation to /users or /blogs... FIX IT!!!
 // Should both this and <Selected blog> user redux or should i just pass blogs from here to it???
 const MainPage = (props) => {
-    console.log(props)
+
     return (
         <Router>
             <div>
@@ -23,10 +24,13 @@ const MainPage = (props) => {
                 </Togglable>
                 <br/>
                 {props.blogs.length === 0 ? <div /> :
-                    <Route exact path="/blogs/:id" render={({ match }) =>
+                    <Route exact path="/blogs/:id" render={({ match, history }) =>
+
                         <div>
 
-                            <SelectedBlog match={match} />
+                            <SelectedBlog match={match} history={history} />
+                            <br/>
+                            <CommentSection match={match}/>
 
                         </div>
                     } />

@@ -12,7 +12,7 @@ const UserPage = (props) => {
     //Mikä ton create napin pitäs olla? create blog? Create user? Pitäisikö sellainen toiminnallisuus olla? Ja että sitä voi käyttää pitää olla toisella userilla sisällä???
 
     //Router ja users/:id conditional route siirretty tänne --> pysyy App siistimpänä, toimii vieläki refressillä koska conditional.
-    console.log(props)
+
     return (
         <Router >
             <div>

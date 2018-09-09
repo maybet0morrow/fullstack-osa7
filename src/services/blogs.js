@@ -5,6 +5,7 @@ let token = null
 
 const getAll = async () => {
     const response = await axios.get(baseUrl)
+    console.log("getting all Blogs")
     return response.data
 }
 
@@ -39,11 +40,10 @@ const deleteBlog = async(object2bRemoved) => {
     }
 
     const response = await axios.delete(`${baseUrl}/${object2bRemoved.id}`, config)
-    console.log(response)
+
     return response
 }
 
-// remove blog id from user???
 
 
 export default { getAll, setToken, create, update, deleteBlog }
