@@ -3,14 +3,15 @@ import { Table } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { notify } from "../reducers/notificationReducer"
+import { tableHeadStyle, tableBodyStyle, tableStyle } from "../styles"
 
 const UserList = (props) => {
 
     return (
         <div>
-            <h2>Blogs</h2>
-            <Table striped celled>
-                <Table.Header>
+            <h2>Users</h2>
+            <Table striped celled inverted color="black" style={tableStyle}>
+                <Table.Header style={tableHeadStyle}>
                     <Table.Row>
                         <Table.HeaderCell>Name</Table.HeaderCell>
                         <Table.HeaderCell>Username</Table.HeaderCell>
@@ -18,11 +19,10 @@ const UserList = (props) => {
 
                     </Table.Row>
                 </Table.Header>
-                <Table.Body>
+                <Table.Body style={tableBodyStyle}>
                     {props.sortedUsers.map(user =>
                         <Table.Row key={user.id}>
                             <Table.Cell>
-                                {/* Whole row as a link, maybe later */}
                                 <Link to={`/users/${user.id}`}> {user.name} </Link>
                             </Table.Cell>
                             <Table.Cell>{user.username}</Table.Cell>

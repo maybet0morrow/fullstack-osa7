@@ -2,6 +2,8 @@ import React from "react"
 import { connect } from "react-redux"
 import { login } from "../reducers/loginReducer"
 import { notify } from "../reducers/notificationReducer"
+import { Form, Button } from "../../node_modules/semantic-ui-react"
+import { generalButton } from "../styles"
 
 class LoginForm extends React.Component {
     handleSubmit = async (e) => {
@@ -20,22 +22,25 @@ class LoginForm extends React.Component {
             <div>
                 <h2>Kirjaudu</h2>
 
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        käyttäjätunnus
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Field>
+
                         <input
                             name="username"
+                            placeholder="Username"
                         />
-                    </div>
-                    <div>
-                        salasana
+                    </Form.Field>
+
+                    <Form.Field>
+
                         <input
                             type="password"
                             name="password"
+                            placeholder="Password"
                         />
-                    </div>
-                    <button type="submit">kirjaudu</button>
-                </form>
+                    </Form.Field>
+                    <Button type="submit" style={generalButton}>Login</Button>
+                </Form>
             </div>
         )
     }

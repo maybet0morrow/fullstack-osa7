@@ -2,6 +2,8 @@ import React from "react"
 
 import { logout } from "../reducers/loginReducer"
 import { connect } from "react-redux"
+import { Button } from "../../node_modules/semantic-ui-react"
+import { generalButton } from "../styles"
 
 class LoginInfo extends React.Component {
 
@@ -10,9 +12,9 @@ class LoginInfo extends React.Component {
             <div>
                 Logged in as {this.props.loggedUser.username}&nbsp;
 
-                <button onClick={this.props.logout}>
+                <Button onClick={this.props.logout} style={generalButton} size="mini">
                     Logout
-                </button>
+                </Button>
             </div>
         )
     }

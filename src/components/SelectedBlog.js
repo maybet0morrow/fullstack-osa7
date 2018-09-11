@@ -2,6 +2,8 @@ import React from "react"
 import { likeBlog, deleteBlog } from "../reducers/blogReducer"
 import { connect } from "react-redux"
 import { notify } from "../reducers/notificationReducer"
+import { Button, Segment, Label, Icon, Header } from "semantic-ui-react"
+import { headerSegmentStyle, likeButton, hideButton, headerStyle, generalButton } from "../styles"
 
 class SelectedBlog extends React.Component {
 
@@ -15,28 +17,70 @@ class SelectedBlog extends React.Component {
     deleteClick = (blog) => (event) => {
         event.preventDefault()
         // props.user doesn't have id so we are determining same user via username, which is viable since backend checks for dublicates.
-        if((blog.user === null)||(this.props.user.username === blog.user.username)){
+        if ((blog.user === null) || (this.props.user.username === blog.user.username)) {
             this.props.deleteBlog(blog)
-            this.props.notify(`${blog.title} deleted.`,false,5)
+            this.props.notify(`${blog.title} deleted.`, false, 5)
             this.props.history.push("/blogs")
-        }else{
-            this.props.notify("You cannot delete blogs created by other users.",true,5)
+        } else {
+            this.props.notify("You cannot delete blogs created by other users.", true, 5)
         }
 
+    }
+    hideSelected = (event) => {
+        event.preventDefault()
+        this.props.history.push("/blogs/")
     }
 
     render() {
         const blog = this.props.blogs.find(a => a.id === this.props.match.params.id)
 
+
+
         return (
             <div>
-                <h2> {blog.title}, by  {blog.author} </h2>
-                <a href={blog.url}>{blog.url}</a>
-                <br/>
-                {blog.likes} likes
-                <button onClick={this.likeClick(blog)}> Like </button>
-                <div>Added by {blog.user === null ? "Anonymous" : blog.user.name} </div>
-                <button onClick={this.deleteClick(blog)} > Delete </button>
+                <Segment inverted style={headerSegmentStyle}>
+                    <Button animated="fade" size="small" color="grey" onClick={this.hideSelected} style={hideButton} >
+                        <Button.Content visible>
+                            <Icon name="close" />
+                        </Button.Content>
+                        <Button.Content hidden> Hide </Button.Content>
+                    </Button>
+                    <Header as="h2" inverted style={headerStyle}> {blog.title}, by {blog.author}</Header>
+
+                </Segment>
+
+                <Segment inverted >
+                    <Label size="large" color="black" >
+                        <Icon name="info" size="large" /> <a href={blog.url}>{blog.url}</a>
+                    </Label>
+                </Segment>
+
+                <Segment inverted>
+                    <Label size="large" color="black" >
+                        <Icon name="chart bar" size="large" />
+                        {blog.likes} likes
+
+                    </Label>
+                    <Button animated="fade" size="small" color="grey" onClick={this.likeClick(blog)} style={likeButton} >
+                        <Button.Content visible>
+                            <Icon name="thumbs up" />
+                        </Button.Content>
+                        <Button.Content hidden> Like </Button.Content>
+                    </Button>
+                </Segment>
+
+
+
+                <Segment inverted>
+                    <Label size="large" color="black">
+                        <Icon name="heart" size="large" />
+                        Added by {blog.user === null ? "Anonymous" : blog.user.name}
+                    </Label>
+                </Segment>
+
+
+                <Button onClick={this.deleteClick(blog)} style={generalButton}> Delete </Button>
+
             </div>
         )
     }
@@ -47,7 +91,7 @@ class SelectedBlog extends React.Component {
 const mapStateToProps = (state) => {
     return {
         blogs: state.blogs,
-        user : state.user,
+        user: state.user,
     }
 }
 

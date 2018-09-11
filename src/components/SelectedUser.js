@@ -13,7 +13,7 @@ const SelectedUser = (props) => {
 
         <div>
             <h2>{user.name}</h2>
-            <Table striped celled>
+            <Table striped celled inverted color="black">
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Title</Table.HeaderCell>

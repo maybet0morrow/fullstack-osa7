@@ -7,11 +7,12 @@ let token = null
 const getAll = async () => {
     const response = await axios.get(baseUrlAll)
     console.log("getting all comments.")
+
     return response.data
 }
 const setToken = (newToken) => {
     token = `bearer ${newToken}`
-    console.log(newToken)
+
 }
 
 const create = async (comment, blogID) => {

@@ -16,13 +16,11 @@ const blogReducer = (store = [], action) => {
         const ids = store.map(a => a.id)
 
         for (let i = 0; i < ids.length; i++) {
-            console.log(ids[i], action.data.id)
             if (ids[i] === action.data.id) {
                 index = i
             }
         }
         store.splice(index, 1)
-        console.log(store)
         return store
     }
 

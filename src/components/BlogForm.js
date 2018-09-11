@@ -1,5 +1,5 @@
 import React from "react"
-
+import { Form, Button } from "semantic-ui-react"
 import { notify } from "../reducers/notificationReducer"
 import { createBlog } from "../reducers/blogReducer"
 import { connect } from "react-redux"
@@ -7,7 +7,7 @@ import { connect } from "react-redux"
 
 class BlogForm extends React.Component {
 
-    // TODO doesn't automaticly toggle visiblity when created.
+
 
     handleSubmit = async (event) => {
         console.log("creating...")
@@ -36,33 +36,19 @@ class BlogForm extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        title:
-                        <input
-                            type="text"
-                            name="title"
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Field>
+                        <input name="title" placeholder="Title of the blog" />
+                    </Form.Field>
+                    <Form.Field>
+                        <input name="author" placeholder="Authors name" />
+                    </Form.Field>
+                    <Form.Field>
+                        <input name="url" placeholder="Link to the blog" />
+                    </Form.Field>
 
-                        />
-                    </div>
-                    <div>
-                        author:
-                        <input
-                            type="text"
-                            name="author"
-
-                        />
-                    </div>
-                    <div>
-                        url:
-                        <input
-                            type="url"
-                            name="url"
-
-                        />
-                    </div>
-                    <button type="submit">create</button>
-                </form>
+                    <Button type="submit">create</Button>
+                </Form>
             </div>
         )
     }
