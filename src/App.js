@@ -77,7 +77,7 @@ class App extends React.Component {
                                 <Route path="/" render={({ history }) =>
                                     <NavMenu history={history} />
                                 } />
-
+                                <br/>
 
                                 <Notification />
 

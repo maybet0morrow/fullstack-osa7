@@ -16,11 +16,11 @@ class SelectedBlog extends React.Component {
 
     deleteClick = (blog) => (event) => {
         event.preventDefault()
-        // props.user doesn't have id so we are determining same user via username, which is viable since backend checks for dublicates.
+        // props.user doesn't have id so we are determining same user via username, which is viable since backend doesn't allow dublicate usernames.
         if ((blog.user === null) || (this.props.user.username === blog.user.username)) {
             this.props.deleteBlog(blog)
             this.props.notify(`${blog.title} deleted.`, false, 5)
-            this.props.history.push("/blogs")
+            this.props.history.push("/blogs/")
         } else {
             this.props.notify("You cannot delete blogs created by other users.", true, 5)
         }
@@ -50,15 +50,17 @@ class SelectedBlog extends React.Component {
                 </Segment>
 
                 <Segment inverted >
-                    <Label size="large" color="black" >
-                        <Icon name="info" size="large" /> <a href={blog.url}>{blog.url}</a>
+                    <Label  color="black"  >
+                        <Icon name="info" size="large" circular inverted/>
+                        <a href={blog.url}><font size="3"> {blog.url}</font></a>
                     </Label>
                 </Segment>
 
                 <Segment inverted>
-                    <Label size="large" color="black" >
-                        <Icon name="chart bar" size="large" />
-                        {blog.likes} likes
+                    <Label  color="black" >
+                        <Icon name="chart bar" size="large" circular inverted/>
+
+                        <font size="3">{blog.likes} likes</font>
 
                     </Label>
                     <Button animated="fade" size="small" color="grey" onClick={this.likeClick(blog)} style={likeButton} >
@@ -72,9 +74,9 @@ class SelectedBlog extends React.Component {
 
 
                 <Segment inverted>
-                    <Label size="large" color="black">
-                        <Icon name="heart" size="large" />
-                        Added by {blog.user === null ? "Anonymous" : blog.user.name}
+                    <Label color="black">
+                        <Icon name="heart" size="large" circular inverted />
+                        <font size="3"> Added by {blog.user === null ? "Anonymous" : blog.user.name} </font>
                     </Label>
                 </Segment>
 

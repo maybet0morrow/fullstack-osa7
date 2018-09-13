@@ -9,8 +9,10 @@ const blogReducer = (store = [], action) => {
 
         return [...old, { ...liked, likes: liked.likes + 1 }]
     }
-    case "CREATE":
+    case "CREATE": {
         return [...store, action.data]
+    }
+
     case "DELETE": {
         let index = 0
         const ids = store.map(a => a.id)

@@ -9,13 +9,10 @@ import { tableHeadStyle, tableBodyStyle, tableStyle } from "../styles"
 // could add header sort by functionality, maybe later
 // changed list to table with headers.
 class BlogList extends React.Component {
-    shouldComponentUpdate(nextProps){
-        console.log(nextProps !== this.props)
-        return(nextProps !== this.props)
-    }
+
     render() {
         console.log("rendering blog list")
-        console.log(this.props)
+
         return (
             <div>
                 <h2 >Blogs</h2>

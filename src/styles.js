@@ -50,4 +50,5 @@ export const formInput = {
     color:"white"
 }
 
+
 export default generalStyle

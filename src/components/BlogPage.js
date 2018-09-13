@@ -13,8 +13,7 @@ class BlogPage extends React.Component {
         return (
             <Router>
                 <div>
-                    <br />
-                    <br />
+                    <br/>
                     <TogglableBlogForm />
                     <br />
                     {this.props.blogs.length === 0 ? <div /> :
