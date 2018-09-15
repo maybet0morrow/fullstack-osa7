@@ -3,10 +3,8 @@ import blogService from "../services/blogs"
 const blogReducer = (store = [], action) => {
     switch (action.type) {
     case "LIKE": {
-
         const old = store.filter(a => a.id !== action.data.id)
         const liked = store.find(a => a.id === action.data.id)
-
         return [...old, { ...liked, likes: liked.likes + 1 }]
     }
     case "CREATE": {
