@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SnapshotTest renders correnctly 1`] = `
+<div>
+  <div
+    className="hideWhenVisible"
+    style={
+      Object {
+        "display": "",
+      }
+    }
+  >
+    <button
+      className="ui button"
+      disabled={undefined}
+      onClick={[Function]}
+      role="button"
+      style={
+        Object {
+          "backgroundColor": "#606060",
+          "color": "white",
+        }
+      }
+      tabIndex={undefined}
+    >
+       New Blog 
+    </button>
+  </div>
+  <div
+    className="showWhenVisible"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <h2>
+       Create a new Blog 
+    </h2>
+    <form
+      action={undefined}
+      className="ui form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="field"
+      >
+        <input
+          name="title"
+          placeholder="Title of the blog"
+        />
+      </div>
+      <div
+        className="field"
+      >
+        <input
+          name="author"
+          placeholder="Authors name"
+        />
+      </div>
+      <div
+        className="field"
+      >
+        <input
+          name="url"
+          placeholder="Link to the blog"
+        />
+      </div>
+      <button
+        className="ui button"
+        disabled={undefined}
+        onClick={[Function]}
+        role="button"
+        style={
+          Object {
+            "backgroundColor": "#606060",
+            "color": "white",
+          }
+        }
+        tabIndex={undefined}
+        type="submit"
+      >
+        Create
+      </button>
+      <button
+        className="ui button"
+        disabled={undefined}
+        onClick={[Function]}
+        role="button"
+        style={
+          Object {
+            "backgroundColor": "#606060",
+            "color": "white",
+          }
+        }
+        tabIndex={undefined}
+        type="cancel"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>
+`;

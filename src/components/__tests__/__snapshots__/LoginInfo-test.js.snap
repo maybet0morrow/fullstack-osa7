@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SnapshotTest renders correnctly 1`] = `
+<div>
+  <span>
+    Logged in as 
+    blaa
+     
+  </span>
+  <button
+    className="ui mini button"
+    disabled={undefined}
+    onClick={[Function]}
+    role="button"
+    style={
+      Object {
+        "backgroundColor": "#606060",
+        "color": "white",
+      }
+    }
+    tabIndex={undefined}
+  >
+    Logout
+  </button>
+</div>
+`;

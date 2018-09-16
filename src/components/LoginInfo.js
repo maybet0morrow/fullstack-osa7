@@ -10,8 +10,9 @@ class LoginInfo extends React.Component {
     render() {
         return (
             <div>
+                <span>
                 Logged in as {this.props.loggedUser.username}&nbsp;
-
+                </span>
                 <Button onClick={this.props.logout} style={generalButton} size="mini">
                     Logout
                 </Button>
