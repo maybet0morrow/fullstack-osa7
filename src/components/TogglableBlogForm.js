@@ -61,7 +61,7 @@ class TogglableBlogForm extends React.Component {
         return (
             <div>
                 <div className="hideWhenVisible" style={hideWhenVisible}>
-                    <Button onClick={this.toggleVisibility} style={generalButton}> New Blog </Button>
+                    <Button className="showBlogFormButton" onClick={this.toggleVisibility} style={generalButton}> New Blog </Button>
                 </div>
                 <div className="showWhenVisible" style={showWhenVisible}>
                     <h2> Create a new Blog </h2>

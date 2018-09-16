@@ -64,7 +64,7 @@ class App extends React.Component {
     render() {
 
         return (
-            <Container style={generalStyle}>
+            <Container className="appContainer" style={generalStyle}>
                 <Router>
 
                     <div>
