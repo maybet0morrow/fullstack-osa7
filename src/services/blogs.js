@@ -1,3 +1,4 @@
+//@flow
 import axios from "axios"
 const baseUrl = "/api/blogs"
 
@@ -9,11 +10,12 @@ const getAll = async () => {
     return response.data
 }
 
-const setToken = (newToken) => {
-    token = `bearer ${newToken}`
+const setToken = (newToken:string) => {
+    token = "bearer "+ newToken
+    console.log(token)
 }
 
-const create = async (newObject) => {
+const create = async (newObject:Object) => {
     const config = {
         headers: { "Authorization": token }
     }
@@ -23,7 +25,7 @@ const create = async (newObject) => {
     return response.data
 }
 
-const update = async (newObject) => {
+const update = async (newObject:Object) => {
     const config = {
         headers: { "Authorization": token }
     }
@@ -34,7 +36,7 @@ const update = async (newObject) => {
     return response.data
 }
 
-const deleteBlog = async(object2bRemoved) => {
+const deleteBlog = async(object2bRemoved:Object) => {
     const config = {
         headers: { "Authorization": token }
     }

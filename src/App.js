@@ -1,3 +1,8 @@
+//@flow
+// Problems with flow, after following the installing guide provided and running npm run flow, got errors for module imports e.g. import React from "react", couldn't resolve
+// steps taken -> unignore node_modules in flow config, still Cannot resolve module `../node_modules/semantic-ui-react`.
+// also error about class App extends React.Component
+// added flow to userReducer and blogService and loginService.
 import React from "react"
 
 import blogService from "./services/blogs"
@@ -43,6 +48,8 @@ TODO:
 */
 // gonna remove the expandable list stuff from blog list and just add delete button on selectedBlog
 
+
+
 class App extends React.Component {
 
 
@@ -62,7 +69,7 @@ class App extends React.Component {
 
     // menu still pretty basic looking but not gonna style it for now, later when adding styles to everything.
     render() {
-
+        console.log(this.props)
         return (
             <Container className="appContainer" style={generalStyle}>
                 <Router>

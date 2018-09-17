@@ -1,6 +1,10 @@
+//@flow
 import userService from "../services/users"
 
-const userReducer = (store =[], action) => {
+
+
+
+const userReducer = (store:Array<Object> =[], action:Object) => {
     switch (action.type){
     case "INIT_USERS":
         return action.data
@@ -11,7 +15,7 @@ const userReducer = (store =[], action) => {
 
 export const initUsers = () => {
     console.log("initing users")
-    return async (dispatch) => {
+    return async (dispatch:Function) => {
         const users = await userService.getAll()
         dispatch({
             type: "INIT_USERS",

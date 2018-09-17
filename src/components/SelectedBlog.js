@@ -17,7 +17,7 @@ class SelectedBlog extends React.Component {
     deleteClick = (blog) => (event) => {
         event.preventDefault()
         // props.user doesn't have id so we are determining same user via username, which is viable since backend doesn't allow dublicate usernames.
-        if ((blog.user === null) || (this.props.user.username === blog.user.username)) {
+        if ((blog.user === null) || (blog.user === undefined) || (this.props.user.username === blog.user.username)) {
             this.props.deleteBlog(blog)
             this.props.notify(`${blog.title} deleted.`, false, 5)
             this.props.history.push("/blogs/")
@@ -76,7 +76,7 @@ class SelectedBlog extends React.Component {
                 <Segment inverted>
                     <Label color="black">
                         <Icon name="heart" size="large" circular inverted />
-                        <font size="3"> Added by {blog.user === null ? "Anonymous" : blog.user.name} </font>
+                        <font size="3"> Added by {blog.user === undefined ? "Anonymous" : blog.user.name} </font>
                     </Label>
                 </Segment>
 
