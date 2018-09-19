@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/blogs/
+content-type: application/json
+
+{
+    "title": "RESTFUL PUT",
+    "author": "ASD",
+    "url": "TESTURL",
+    "likes": 1
+}

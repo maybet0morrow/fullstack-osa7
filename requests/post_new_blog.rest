@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVlc2ltIiwiaWQiOiI1YjkyNjU4YzE1MmU3NTExZTBhZjFjZmYiLCJpYXQiOjE1MzYzMjA5MjF9._i3AN39T02kf3moWvc7Ra2iHp9xktqSr8XyNr8hg2bU
+
+{
+    "title": "T4.20 Test",
+    "author": "TestTest",
+    "url": "www.TEST.io",
+    "likes" : "1"  
+}
