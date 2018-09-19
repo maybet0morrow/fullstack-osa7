@@ -33,10 +33,11 @@ export const login = (username, password) => {
                 type: "LOGIN",
                 data: user
             })
+            return user
         }catch(exception){
             notify("Login failed...", true, 5)
         }
-
+        return null
 
 
 

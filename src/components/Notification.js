@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 class Notification extends React.Component {
 
     render() {
+        console.log("rendering notification")
         const styleError = {
             border: "solid",
             color: "red",
@@ -40,7 +41,7 @@ class Notification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
+    console.log(state.notification.message)
     return {
         notification : state.notification
     }

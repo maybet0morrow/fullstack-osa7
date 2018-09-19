@@ -34,6 +34,7 @@ Ongelmia:
 - blogs/id --> blogs näyttää vieläkin selected blogin
 
 -Delete blog ei päivity
+- Kirjautuessa notification state ei päivity --> notification ei renderaa, varmaan koska, loginForm --> loginReducer --> NotificationReducer --> Notification
 
 
 FIXED:
@@ -67,7 +68,7 @@ class App extends React.Component {
         }
     }
 
-    // menu still pretty basic looking but not gonna style it for now, later when adding styles to everything.
+
     render() {
         console.log(this.props)
         return (
@@ -75,9 +76,9 @@ class App extends React.Component {
                 <Router>
 
                     <div>
+                        <Notification />
                         {this.props.loggedUser === null ?
                             <div>
-                                <Notification />
                                 <LoginForm />
                             </div> :
                             <div>
@@ -86,12 +87,9 @@ class App extends React.Component {
                                 } />
                                 <br/>
 
-                                <Notification />
+                                <Route path="/users/" render={() => <UserPage />} />
 
-
-                                <Route path="/users" render={() => <UserPage />} />
-
-                                <Route path="/blogs" render={() => <BlogPage />} />
+                                <Route path="/blogs/" render={() => <BlogPage />} />
 
 
 
@@ -111,7 +109,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
         users: state.users,
         notification: state.notification,

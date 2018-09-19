@@ -12,12 +12,16 @@ class LoginForm extends React.Component {
         const username = e.target.username.value
         const password = e.target.password.value
         this.props.login(username,password)
+        e.target.username.value = ""
+        e.target.password.value = ""
+
 
 
 
 
     }
     render() {
+        console.log("rendering LoginForm")
         return (
             <div>
                 <h2>Kirjaudu</h2>

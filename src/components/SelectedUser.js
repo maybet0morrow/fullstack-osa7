@@ -3,12 +3,12 @@ import { Table } from "semantic-ui-react"
 import { connect } from "react-redux"
 
 
-//needs to work from direct url and refresh!!!
-// this doesn't work as 7.3 should, dunno why mainpage waits for data to load and this just tries to render...
+
 // Probably better to keep redux here still so app doesn't have extra stuff.
 const SelectedUser = (props) => {
     const user = props.users.find(a => a.id === props.match.params.id)
-    const blogs = props.blogs.filter(a => a.user._id === user.id)
+    const blogsWithUser = props.blogs.filter(a => a.user !== undefined)
+    const blogs = blogsWithUser.filter(a => a.user._id === user.id)
     return (
 
         <div>
